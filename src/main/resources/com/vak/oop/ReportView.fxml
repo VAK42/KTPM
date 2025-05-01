@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.vak.oop.controller.ReportController">
+  <HBox spacing="5">
+    <VBox HBox.hgrow="ALWAYS" alignment="TOP_CENTER" spacing="5">
+      <HBox spacing="5" alignment="CENTER">
+        <MFXButton buttonType="RAISED" mnemonicParsing="false" text="X Delete" prefWidth="70"
+                   styleClass="Btn" onAction="#deleteSelectedReport"/>
+        <MFXButton buttonType="RAISED" mnemonicParsing="false" text="* Refresh" prefWidth="70" styleClass="Btn"
+                   onAction="#refreshReports"/>
+      </HBox>
+      <MFXTableView fx:id="reportTable" footerVisible="false" minHeight="380">
+        <tableColumns>
+          <MFXTableColumn fx:id="reportid" text="REPORT ID" styleClass="reportBF"/>
+          <MFXTableColumn fx:id="userid" text="USERNAME" styleClass="reportBF"/>
+          <MFXTableColumn fx:id="rpname" text="REPORT NAME" styleClass="reportBF"/>
+          <MFXTableColumn fx:id="rpinfo" text="REPORT INFO" styleClass="reportBF"/>
+        </tableColumns>
+      </MFXTableView>
+      <HBox fx:id="paginationContainer" spacing="5" alignment="CENTER"/>
+    </VBox>
+  </HBox>
+</StackPane>
