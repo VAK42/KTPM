@@ -9,7 +9,7 @@ CREATE TABLE "user" (
 );
 
 INSERT INTO "user" (username, password, email, role) VALUES
-('vak', '1412', 'vak@gmail.com', 'admin');
+('vak', '0000', 'vak@gmail.com', 'admin');
 
 CREATE TABLE product (
     pdId SERIAL PRIMARY KEY,
@@ -34,8 +34,8 @@ CREATE TABLE import (
 );
 
 INSERT INTO import (pdName, pdPrice, pdType, pdQuantity, date) VALUES
-('NVIDIA GeForce RTX 5090', 800.00, 'Electronics', 5, '2025-04-20 10:00:00'),
-('AMD Ryzen Threadripper Pro 7995WX', 1200.00, 'Electronics', 2, '2025-04-21 11:00:00');
+('NVIDIA GeForce RTX 5090', 800.00, 'Electronics', 5, '2025-05-20 10:00:00'),
+('AMD Ryzen Threadripper Pro 7995WX', 1200.00, 'Electronics', 2, '2025-05-22 11:00:00');
 
 CREATE TABLE export (
     epId SERIAL PRIMARY KEY,
@@ -50,7 +50,7 @@ CREATE TABLE export (
 );
 
 INSERT INTO export (pdId, pdName, pdType, pdPrice, pdQuantity, pdTotalPrice, date) VALUES
-(1, 'NVIDIA GeForce RTX 5090', 'Electronics', 800.00, 2, 1600.00, '2025-04-23 14:00:00'),
+(1, 'NVIDIA GeForce RTX 5090', 'Electronics', 800.00, 2, 1600.00, '2025-04-26 14:00:00'),
 (2, 'AMD Ryzen Threadripper Pro 7995WX', 'Electronics', 1200.00, 1, 1200.00, '2025-04-24 15:30:00');
 
 CREATE TABLE report (
