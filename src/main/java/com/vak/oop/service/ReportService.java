@@ -7,21 +7,21 @@ import jakarta.persistence.EntityManager;
 import java.util.List;
 
 public class ReportService {
-    private final ReportDao reportDao;
+  private final ReportDao reportDao;
 
-    public ReportService(EntityManager entityManager) {
-        this.reportDao = new ReportDao(entityManager);
-    }
+  public ReportService(EntityManager entityManager) {
+    this.reportDao = new ReportDao(entityManager);
+  }
 
-    public void deleteReport(ReportEntity reportEntity) {
-        reportDao.deleteReport(reportEntity);
-    }
+  public void deleteReport(ReportEntity reportEntity) {
+    reportDao.deleteReport(reportEntity);
+  }
 
-    public List<ReportEntity> getReportsByPage(int page, int size) {
-        return reportDao.getReportsByPage(page, size);
-    }
+  public List<ReportEntity> getReportsByPage(int page, int size) {
+    return reportDao.getReportsByPage(page, size);
+  }
 
-    public int getTotalReportCount() {
-        return reportDao.getTotalReportCount();
-    }
+  public int getTotalReportCount() {
+    return reportDao.getTotalReportCount();
+  }
 }

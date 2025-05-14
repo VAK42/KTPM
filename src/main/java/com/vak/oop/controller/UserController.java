@@ -1,7 +1,7 @@
 package com.vak.oop.controller;
 
-import com.vak.oop.model.ReportEntity;
-import com.vak.oop.service.ReportService;
+import com.vak.oop.model.UserEntity;
+import com.vak.oop.service.UserService;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
@@ -20,20 +20,18 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ReportController implements Initializable {
+public class UserController implements Initializable {
   static public EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("PersistenceUnit");
   public EntityManager entityManager = entityManagerFactory.createEntityManager();
-  private ReportService reportService;
+  private UserService userService;
   @FXML
-  private MFXTableView<ReportEntity> reportTable;
+  private MFXTableView<UserEntity> userTable;
   @FXML
-  private MFXTableColumn<ReportEntity> reportid;
+  private MFXTableColumn<UserEntity> userid;
   @FXML
-  private MFXTableColumn<ReportEntity> username;
+  private MFXTableColumn<UserEntity> username;
   @FXML
-  private MFXTableColumn<ReportEntity> rpname;
-  @FXML
-  private MFXTableColumn<ReportEntity> rpinfo;
+  private MFXTableColumn<UserEntity> email;
   @FXML
   private HBox paginationContainer;
   private static final int ITEMS_PER_PAGE = 1;
@@ -42,33 +40,22 @@ public class ReportController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    reportService = new ReportService(entityManager);
+    userService = new UserService(entityManager);
     setCol();
     setWidth();
-    loadReports();
+    loadUsers();
   }
 
   private void setCol() {
-    reportid.setRowCellFactory(_ -> new MFXTableRowCell<>(ReportEntity::getReportid));
-    username.setRowCellFactory(_ -> new MFXTableRowCell<>(report -> report.getUser().getUsername()));
-    rpname.setRowCellFactory(_ -> new MFXTableRowCell<>(ReportEntity::getRpname));
-    rpinfo.setRowCellFactory(_ -> new MFXTableRowCell<>(ReportEntity::getRpinfo));
+    userid.setRowCellFactory(_ -> new MFXTableRowCell<>(UserEntity::getUserId));
+    username.setRowCellFactory(_ -> new MFXTableRowCell<>(UserEntity::getUsername));
+    email.setRowCellFactory(_ -> new MFXTableRowCell<>(UserEntity::getEmail));
   }
 
   private void setWidth() {
-    reportid.prefWidthProperty().bind(reportTable.widthProperty().multiply(0.1));
-    username.prefWidthProperty().bind(reportTable.widthProperty().multiply(0.2));
-    rpname.prefWidthProperty().bind(reportTable.widthProperty().multiply(0.35));
-    rpinfo.prefWidthProperty().bind(reportTable.widthProperty().multiply(0.35));
-  }
-
-  private void loadReports() {
-    int totalItems = reportService.getTotalReportCount();
-    totalPages = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
-    currentPage = Math.max(1, Math.min(currentPage, totalPages));
-    List<ReportEntity> pageItems = reportService.getReportsByPage(currentPage, ITEMS_PER_PAGE);
-    reportTable.getItems().setAll(pageItems);
-    updatePaginationUI();
+    userid.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
+    username.prefWidthProperty().bind(userTable.widthProperty().multiply(0.3));
+    email.prefWidthProperty().bind(userTable.widthProperty().multiply(0.4));
   }
 
   private void updatePaginationUI() {
@@ -99,7 +86,7 @@ public class ReportController implements Initializable {
     btn.getStyleClass().add("paginationLabel");
     btn.setOnAction(_ -> {
       currentPage = page;
-      loadReports();
+      loadUsers();
     });
     return btn;
   }
@@ -115,22 +102,31 @@ public class ReportController implements Initializable {
     btn.getStyleClass().add("Btn");
     btn.setOnAction(_ -> {
       currentPage = targetPage;
-      loadReports();
+      loadUsers();
     });
     return btn;
   }
 
+  private void loadUsers() {
+    int totalItems = userService.getTotalUserCount();
+    totalPages = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
+    currentPage = Math.max(1, Math.min(currentPage, totalPages));
+    List<UserEntity> pageItems = userService.getUsersByPage(currentPage, ITEMS_PER_PAGE);
+    userTable.getItems().setAll(pageItems);
+    updatePaginationUI();
+  }
+
   @FXML
-  private void deleteReport() {
-    ReportEntity selectedReport = reportTable.getSelectionModel().getSelectedValue();
-    if (selectedReport != null) {
+  private void deleteUser() {
+    UserEntity selectedUser = userTable.getSelectionModel().getSelectedValue();
+    if (selectedUser != null) {
       Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are You Sure You Want To Delete This Item?", ButtonType.OK, ButtonType.CANCEL);
       confirmAlert.setHeaderText(null);
       confirmAlert.setTitle("");
       confirmAlert.showAndWait().ifPresent(response -> {
         if (response == ButtonType.OK) {
-          reportService.deleteReport(selectedReport);
-          loadReports();
+          userService.deleteUser(selectedUser);
+          loadUsers();
         }
       });
     } else {
