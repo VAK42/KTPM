@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<VBox maxHeight="350" maxWidth="250" minHeight="350" minWidth="250" prefHeight="350" prefWidth="250" alignment="CENTER"
+      spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.vak.oop.controller.ProductFilterController"
+      stylesheets="@OOP.css">
+  <MFXTextField fx:id="searchField" floatingText="Search" floatMode="BORDER" prefWidth="200" prefHeight="40"/>
+  <MFXComboBox fx:id="sortBox" promptText="Sort" prefWidth="120" prefHeight="40"/>
+  <MFXButton buttonType="RAISED" mnemonicParsing="false" text="OK" prefWidth="150" prefHeight="40"
+             onAction="#applyFilter" styleClass="Btn"/>
+</VBox>

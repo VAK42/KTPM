@@ -1,0 +1,102 @@
+.loginSP,
+.loginVB,
+.homeSP {
+    -fx-background-color: #fff;
+}
+
+.loginVB {
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: #8e44ad;
+}
+
+.Btn {
+    -fx-border-width: 2px;
+    -fx-border-color: #8e44ad;
+    -fx-text-fill: #8e44ad;
+}
+
+.logoHB {
+    -fx-padding: 40 0 40 0;
+}
+
+.homeVB {
+    -fx-border-width: 2px;
+    -fx-border-color: transparent #8e44ad transparent transparent;
+}
+
+.dashboardBtn,
+.productBtn,
+.importBtn,
+.exportBtn {
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}
+
+.dashboardBtn:hover,
+.productBtn:hover,
+.importBtn:hover,
+.exportBtn:hover,
+.date-picker-popup .label,
+.date-cell {
+    -fx-text-fill: #8e44ad;
+}
+
+.activeBtn {
+    -fx-text-fill: #8e44ad;
+    -fx-border-width: 4px;
+    -fx-border-color: transparent transparent transparent #8e44ad;
+}
+
+.dashboardTT {
+    -fx-text-fill: #8e44ad;
+    -fx-font-size: 16px;
+    -fx-border-width: 2px;
+    -fx-border-color: #8e44ad;
+    -fx-padding: 10px;
+}
+
+.dashboardTXT {
+    -fx-font-size: 14px;
+    -fx-border-width: 2px;
+    -fx-border-color: transparent transparent #8e44ad transparent;
+    -fx-padding: 4px;
+}
+
+.date-picker,
+.date-picker-popup {
+    -fx-background-color: #8e44ad;
+    -fx-border-color: #8e44ad;
+    -fx-focus-color: #8e44ad;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #8e44ad;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: white;
+}
+
+.date-picker .cell:hover,
+.date-picker .cell:focused {
+    -fx-background-color: #d1d1d1;
+}
+
+.date-picker .selected,
+.date-picker .selected:focused {
+    -fx-background-color: #8e44ad;
+    -fx-text-fill: white;
+}
+
+.paginationLabel {
+    -fx-text-fill: #8e44ad;
+    -fx-border-width: 2px;
+    -fx-border-color: transparent transparent #8e44ad transparent;
+    -fx-font-size: 16px;
+    -fx-padding: 0 8px;
+}
+
+.date-picker .text-field .prompt-text {
+    -fx-text-fill: black;
+}

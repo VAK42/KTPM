@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.vak.oop.controller.ImportController">
+  <HBox spacing="5">
+    <VBox HBox.hgrow="ALWAYS" alignment="TOP_CENTER" spacing="5">
+      <HBox spacing="5" alignment="CENTER">
+        <MFXButton buttonType="RAISED" mnemonicParsing="false" text="+ Create" prefWidth="70" styleClass="Btn"
+                   onAction="#createImport"/>
+        <MFXButton buttonType="RAISED" mnemonicParsing="false" text="↓ Excel" prefWidth="70" styleClass="Btn"
+                   onAction="#exportToExcel"/>
+      </HBox>
+      <MFXTableView fx:id="importTable" footerVisible="false" minHeight="380">
+        <tableColumns>
+          <MFXTableColumn fx:id="ipid" text="IMPORT ID"/>
+          <MFXTableColumn fx:id="pdname" text="PRODUCT NAME"/>
+          <MFXTableColumn fx:id="pdprice" text="PRICE"/>
+          <MFXTableColumn fx:id="pdquantity" text="QUANTITY"/>
+          <MFXTableColumn fx:id="date" text="DATE"/>
+        </tableColumns>
+      </MFXTableView>
+      <HBox fx:id="paginationContainer" spacing="5" alignment="CENTER"/>
+    </VBox>
+  </HBox>
+</StackPane>

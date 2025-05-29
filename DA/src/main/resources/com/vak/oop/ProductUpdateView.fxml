@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox maxHeight="400" maxWidth="280" minHeight="400" minWidth="280" prefHeight="400" prefWidth="280"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.vak.oop.controller.ProductUpdateController" spacing="10"
+      alignment="CENTER" stylesheets="@OOP.css">
+  <MFXTextField fx:id="pdidField" floatingText="Product ID" floatMode="BORDER" prefWidth="200" prefHeight="40"
+                editable="false"/>
+  <MFXTextField fx:id="pdnameField" floatingText="Product Name" floatMode="BORDER" prefWidth="200" prefHeight="40"/>
+  <MFXTextField fx:id="pdpriceField" floatingText="Product Price" floatMode="BORDER" prefWidth="200" prefHeight="40"/>
+  <MFXComboBox fx:id="categoryField" floatingText="Product Type" floatMode="BORDER" prefWidth="200" prefHeight="40"/>
+  <MFXTextField fx:id="pdinfoField" floatingText="Product Info" floatMode="BORDER" prefWidth="200" prefHeight="40"/>
+  <MFXTextField fx:id="pdquantityField" floatingText="Product Quantity" floatMode="BORDER" prefWidth="200"
+                prefHeight="40" editable="false"/>
+  <MFXButton buttonType="RAISED" mnemonicParsing="false" text="Update" prefWidth="100" prefHeight="40"
+             onAction="#handleUpdate" styleClass="Btn"/>
+</VBox>

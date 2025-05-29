@@ -36,6 +36,7 @@ CREATE TABLE import (
     pdId UUID NOT NULL REFERENCES product(pdId) ON DELETE RESTRICT,
     pdPrice NUMERIC(12,2) NOT NULL,
     pdQuantity INTEGER NOT NULL,
+    userId UUID NOT NULL REFERENCES "user"(userId) ON DELETE SET NULL,
     date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -44,7 +45,7 @@ CREATE TABLE export (
     pdId UUID NOT NULL REFERENCES product(pdId) ON DELETE RESTRICT,
     pdPrice NUMERIC(12,2) NOT NULL,
     pdQuantity INTEGER NOT NULL,
-    pdTotalPrice NUMERIC(12,2) NOT NULL,
+    pdTotalPrice NUMERIC(12,2) GENERATED ALWAYS AS (pdPrice * pdQuantity) STORED,
     userId UUID NOT NULL REFERENCES "user"(userId) ON DELETE SET NULL,
     date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -118,31 +119,31 @@ VALUES
 ('Razer Blade 14', 2199.00, (SELECT categoryId FROM category WHERE name = 'Laptop'), 'High-end Gaming Laptop', 6),
 ('Framework Laptop 13', 999.00, (SELECT categoryId FROM category WHERE name = 'Laptop'), 'Repairable Modular Laptop', 9);
 
-INSERT INTO import (pdId, pdPrice, pdQuantity)
-SELECT pdId, pdPrice, pdQuantity
+INSERT INTO import (pdId, pdPrice, pdQuantity, userId)
+SELECT pdId, pdPrice, pdQuantity, (SELECT userId FROM "user" WHERE username = 'admin')
 FROM product;
 
-INSERT INTO export (pdId, pdPrice, pdQuantity, pdTotalPrice, userId)
+INSERT INTO export (pdId, pdPrice, pdQuantity, userId)
 VALUES
-((SELECT pdId FROM product WHERE pdName = 'Samsung Galaxy S24'), 899.99, 3, 2699.97, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'iPhone 15 Pro'), 1199.00, 2, 2398.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Google Pixel 8 Pro'), 999.00, 1, 999.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'ASUS ROG Phone 7'), 1099.00, 2, 2198.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'iPad Pro M2'), 1099.99, 2, 2199.98, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Samsung Galaxy Tab S9'), 799.00, 2, 1598.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Lenovo Tab Extreme'), 649.00, 1, 649.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Intel Core i9-13900K'), 599.00, 4, 2396.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'AMD Ryzen 9 7950X'), 649.00, 3, 1947.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'NVIDIA RTX 4090'), 1599.00, 1, 1599.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'AMD Radeon RX 7900 XTX'), 999.00, 2, 1998.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'ASUS ROG Zephyrus G14'), 1599.00, 2, 3198.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Dell XPS 13 Plus'), 1399.00, 1, 1399.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Apple MacBook Air M3'), 1299.00, 2, 2598.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Lenovo Legion 5 Pro'), 1399.00, 2, 2798.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Framework Laptop 13'), 999.00, 1, 999.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Microsoft Surface Laptop 5'), 1299.00, 2, 2598.00, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'MSI MAG B550M'), 129.99, 3, 389.97, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Corsair Vengeance 32GB DDR5'), 149.99, 2, 299.98, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Samsung 990 Pro 1TB SSD'), 169.99, 3, 509.97, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Cooler Master Hyper 212'), 49.99, 2, 99.98, (SELECT userId FROM "user" WHERE username = 'admin')),
-((SELECT pdId FROM product WHERE pdName = 'Be Quiet! Pure Power 12 750W'), 119.99, 2, 239.98, (SELECT userId FROM "user" WHERE username = 'admin'));
+((SELECT pdId FROM product WHERE pdName = 'Samsung Galaxy S24'), 899.99, 3, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'iPhone 15 Pro'), 1199.00, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Google Pixel 8 Pro'), 999.00, 1, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'ASUS ROG Phone 7'), 1099.00, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'iPad Pro M2'), 1099.99, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Samsung Galaxy Tab S9'), 799.00, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Lenovo Tab Extreme'), 649.00, 1, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Intel Core i9-13900K'), 599.00, 4, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'AMD Ryzen 9 7950X'), 649.00, 3, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'NVIDIA RTX 4090'), 1599.00, 1, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'AMD Radeon RX 7900 XTX'), 999.00, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'ASUS ROG Zephyrus G14'), 1599.00, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Dell XPS 13 Plus'), 1399.00, 1, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Apple MacBook Air M3'), 1299.00, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Lenovo Legion 5 Pro'), 1399.00, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Framework Laptop 13'), 999.00, 1, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Microsoft Surface Laptop 5'), 1299.00, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'MSI MAG B550M'), 129.99, 3, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Corsair Vengeance 32GB DDR5'), 149.99, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Samsung 990 Pro 1TB SSD'), 169.99, 3, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Cooler Master Hyper 212'), 49.99, 2, (SELECT userId FROM "user" WHERE username = 'admin')),
+((SELECT pdId FROM product WHERE pdName = 'Be Quiet! Pure Power 12 750W'), 119.99, 2, (SELECT userId FROM "user" WHERE username = 'admin'));

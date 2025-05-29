@@ -1,0 +1,60 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 1vw;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+
+::selection {
+  background-color: black;
+  color: white;
+}
+
+.Carousel .swiper-button-next,
+.Carousel .swiper-button-prev {
+  color: #5eead4;
+}
+
+.Carousel .swiper-pagination-bullet-active {
+  background-color: #5eead4;
+}
+
+.ProseMirror:focus {
+  outline: none !important;
+}
+
+.anmt {
+  position: relative;
+  overflow: hidden;
+}
+
+.anmt:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  border-bottom: 2px solid #5eead4;
+  transition: left 0.5s;
+}
+
+.anmt:hover:before {
+  left: 0;
+}
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  --_c: no-repeat radial-gradient(farthest-side, #25b09b 92%, #0000);
+  background: var(--_c) top, var(--_c) left, var(--_c) right, var(--_c) bottom;
+  background-size: 12px 12px;
+  animation: ld 1s infinite;
+}
+
+@keyframes ld {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
