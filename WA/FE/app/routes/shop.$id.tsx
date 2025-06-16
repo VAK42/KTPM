@@ -32,8 +32,8 @@ export default function Product() {
   const data: Product = useLoaderData();
   const [info, setInfo] = useState("");
   const handleCart = async () => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const oop = cart.findIndex((item: any) => item.pdId === parseInt(data.id));
+    const cart = JSON.parse(localStorage.getItem("pd") || "[]");
+    const oop = cart.findIndex((item: any) => item.id === data.id);
     if (oop !== -1) {
       cart[oop].quantity += 1;
       cart[oop].total = parseFloat((cart[oop].price * cart[oop].quantity).toFixed(2));
